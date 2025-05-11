@@ -1,120 +1,56 @@
-import React, { useState } from "react";
 import NavBar from "../components/NavBar";
 import MenuIzquierdo from "../components/Sidebar";
 import Footer from "../components/Footer";
+import TablaUsuarios from "../components/Tables/UserTable";
 
 function Profiles() {
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      name: "Joselin Cortes Sanchez",
-      phone: "2481551010",
-      mobile: "2481151311",
-      email: "joselin.cortess01@gmial.com",
-      status: "Pendiente",
-      username: "joselin123",
-    },
-    {
-      id: 2,
-      name: "Esther Dominguez",
-      phone: "2481551010",
-      mobile: "2481151311",
-      email: "Esther.domiguez01@gmial.com",
-      status: "Comite",
-      username: "esther123",
-    },
-  ]);
-
- const handleEdit = (userId) => {
-    // Lógica para editar
-    console.log(`Editar usuario con ID: ${userId}`);
-  };
-
-  const handleDelete = (userId) => {
-     //Lógica para eliminar
-    setUsers(users.filter((user) => user.id !== userId));
-    console.log(`Eliminar usuario con ID: ${userId}`);
-  };
-
   return (
     <div className="container-scroller">
+      {/* partial:../../partials/_navbar.html */}
       <NavBar />
-      <br />
+      <br></br> <br></br>
+      {/* partial */}
       <div className="container-fluid page-body-wrapper">
+        {/* partial:../../partials/_settings-panel.html */}
+
+        {/* partial */}
+        {/* partial:../../partials/_sidebar.html */}
         <MenuIzquierdo />
+        {/* partial */}
         <div className="main-panel">
           <div className="content-wrapper">
-            <header className="page-header">
-              <h3 className="page-title">Perfil de usuarios</h3>
+            <div className="page-header">
+              <h3 className="page-title"> Perfil de usuarios </h3>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
-                    <a href="#">Tablas</a>
+                    <a href="#">Tables</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
-                    Tabla de datos
+                    Data table
                   </li>
                 </ol>
               </nav>
-            </header>
+            </div>
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Tabla de datos</h4>
-                <table id="order-listing" className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Nombre completo</th>
-                      <th>Teléfono</th>
-                      <th>Celular</th>
-                      <th>Correo electrónico</th>
-                      <th>Estado</th>
-                      <th>Usuario</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {users.map((user) => (
-                      <tr key={user.id}>
-                        <td>{user.id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.phone}</td>
-                        <td>{user.mobile}</td>
-                        <td>{user.email}</td>
-                        <td>
-                          <label
-                            className={`badge badge-${
-                              user.status === "Pendiente" ? "danger" : "success"
-                            }`}
-                          >
-                            {user.status}
-                          </label>
-                        </td>
-                        <td>{user.username}</td>
-                        <td>
-                          <button
-                            className="btn btn-sm edit"
-                            //onClick={() => handleEdit(user.id)}
-                          >
-                            ✏️
-                          </button>
-                          <button
-                            className="btn btn-sm delete"
-                            //onClick={() => handleDelete(user.id)}
-                          >
-                            🗑️
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <h4 className="card-title">Data table</h4>
+                <div className="row">
+                  <div className="col-12">
+                   <TablaUsuarios/> 
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          {/* content-wrapper ends */}
+          {/* partial:../../partials/_footer.html */}
           <Footer />
+          {/* partial */}
         </div>
+        {/* main-panel ends */}
       </div>
+      {/* page-body-wrapper ends */}
     </div>
   );
 }
