@@ -6,6 +6,17 @@ import Footer from "../components/Footer";
 function Client() {
   const [usuarios, setUsuarios] = useState<any[]>([]);
   const [usuarioEditando, setUsuarioEditando] = useState<any | null>(null);
+  const [nuevoUsuario, setNuevoUsuario] = useState({
+    nombre: "",
+    a_paterno: "",
+    a_materno: "",
+    telefono: "",
+    celular: "",
+    correo_electronico: "",
+    contraseña: "",
+  });
+  const [mostrarFormularioNuevo, setMostrarFormularioNuevo] = useState(false);
+  
 
   useEffect(() => {
     fetch("http://localhost:8000/api/usuarios")
@@ -32,6 +43,28 @@ function Client() {
         setUsuarios((prev) => prev.filter((u) => u.id_usuarios !== id));
       })
       .catch((error) => console.error("Error al eliminar:", error));
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!usuarioEditando) return;
+
+    fetch(`http://localhost:8000/api/usuarios/${usuarioEditando.id_usuarios}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(usuarioEditando),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Error en la actualización");
+        return res.json();
+      })
+      .then((data) => {
+        setUsuarios((prev) =>
+          prev.map((u) => (u.id_usuarios === data.id_usuarios ? data : u))
+        );
+        setUsuarioEditando(null);
+      })
+      .catch((err) => console.error("Error al editar:", err));
   };
 
   return (
@@ -61,6 +94,13 @@ function Client() {
                 <h4 className="card-title">Lista de usuarios</h4>
                 <div className="row">
                   <div className="col-12">
+                    <button
+                      className="btn btn-success mb-3"
+                      onClick={() => setMostrarFormularioNuevo(true)}
+                    >
+                      Agregar Usuario
+                    </button>
+
                     <table className="table">
                       <thead>
                         <tr>
@@ -135,29 +175,7 @@ function Client() {
             >
               <div className="modal-dialog">
                 <div className="modal-content">
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      fetch(
-                        `http://localhost:8000/api/usuarios/${usuarioEditando.id_usuarios}`,
-                        {
-                          method: "PUT",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify(usuarioEditando),
-                        }
-                      )
-                        .then((res) => res.json())
-                        .then((data) => {
-                          setUsuarios((prev) =>
-                            prev.map((u) =>
-                              u.id_usuarios === data.id_usuarios ? data : u
-                            )
-                          );
-                          setUsuarioEditando(null);
-                        })
-                        .catch((err) => console.error("Error al editar:", err));
-                    }}
-                  >
+                  <form onSubmit={handleFormSubmit}>
                     <div className="modal-header">
                       <h5 className="modal-title">Editar Usuario</h5>
                       <button
@@ -215,7 +233,6 @@ function Client() {
                           })
                         }
                       />
-                      {/* Puedes agregar más campos si lo deseas */}
                     </div>
                     <div className="modal-footer">
                       <button type="submit" className="btn btn-primary">
@@ -234,6 +251,106 @@ function Client() {
               </div>
             </div>
           )}
+          {mostrarFormularioNuevo && (
+            <div
+              className="modal fade show"
+              style={{
+                display: "block",
+                backgroundColor: "rgba(0,0,0,0.5)",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                zIndex: 1050,
+              }}
+              tabIndex={-1}
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      fetch("http://localhost:8000/api/usuarios", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(nuevoUsuario),
+                      })
+                        .then((res) => {
+                          if (!res.ok)
+                            throw new Error("Error al crear usuario");
+                          return res.json();
+                        })
+                        .then((data) => {
+                          setUsuarios((prev) => [...prev, data]);
+                          setMostrarFormularioNuevo(false);
+                          setNuevoUsuario({
+                            nombre: "",
+                            a_paterno: "",
+                            a_materno: "",
+                            telefono: "",
+                            celular: "",
+                            correo_electronico: "",
+                            contraseña: "",
+                          });
+                        })
+                        .catch((err) => console.error("Error al crear:", err));
+                    }}
+                  >
+                    <div className="modal-header">
+                      <h5 className="modal-title">Nuevo Usuario</h5>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        onClick={() => setMostrarFormularioNuevo(false)}
+                      ></button>
+                    </div>
+                    <div className="modal-body">
+                      {[
+                        "nombre",
+                        "a_paterno",
+                        "a_materno",
+                        "telefono",
+                        "celular",
+                        "correo_electronico",
+                        "contraseña",
+                      ].map((campo) => (
+                        <input
+                          key={campo}
+                          type={
+                            campo === "correo_electronico" ? "email" : "text"
+                          }
+                          className="form-control mb-2"
+                          placeholder={
+                            campo.charAt(0).toUpperCase() + campo.slice(1)
+                          }
+                          value={(nuevoUsuario as any)[campo]}
+                          onChange={(e) =>
+                            setNuevoUsuario({
+                              ...nuevoUsuario,
+                              [campo]: e.target.value,
+                            })
+                          }
+                        />
+                      ))}
+                    </div>
+                    <div className="modal-footer">
+                      <button type="submit" className="btn btn-primary">
+                        Crear Usuario
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={() => setMostrarFormularioNuevo(false)}
+                      >
+                        Cancelar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -241,4 +358,3 @@ function Client() {
 }
 
 export default Client;
-
