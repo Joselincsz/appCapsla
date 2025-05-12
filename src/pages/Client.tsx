@@ -1,228 +1,113 @@
+import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import MenuIzquiero from "../components/Sidebar";
+import MenuIzquierdo from "../components/Sidebar";
 import Footer from "../components/Footer";
 
 function Client() {
+  const [usuarios, setUsuarios] = useState<any[]>([]);
+  const [usuarioEditando, setUsuarioEditando] = useState<any | null>(null);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/usuarios")
+      .then((res) => res.json())
+      .then((data) => setUsuarios(data))
+      .catch((error) => console.error("Error al obtener usuarios:", error));
+  }, []);
+
+  const handleEdit = (id: number) => {
+    const usuario = usuarios.find((u) => u.id_usuarios === id);
+    setUsuarioEditando(usuario);
+  };
+
+  const handleDelete = (id: number) => {
+    const confirmar = window.confirm("¿Deseas eliminar este usuario?");
+    if (!confirmar) return;
+
+    fetch(`http://localhost:8000/api/usuarios/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("No se pudo eliminar");
+        setUsuarios((prev) => prev.filter((u) => u.id_usuarios !== id));
+      })
+      .catch((error) => console.error("Error al eliminar:", error));
+  };
+
   return (
     <div className="container-scroller">
-      {/* partial:../../partials/_navbar.html */}
-      <NavBar /> <br></br>
-      <br></br>
-      {/* partial */}
+      <NavBar />
+      <br />
       <div className="container-fluid page-body-wrapper">
-        {/* partial:../../partials/_settings-panel.html */}
-        {/* partial */}
-        {/* partial:../../partials/_sidebar.html */}
-        <MenuIzquiero />
-        {/* partial */}
+        <MenuIzquierdo />
         <div className="main-panel">
           <div className="content-wrapper">
             <div className="page-header">
-              <h3 className="page-title"> Data table </h3>
+              <h3 className="page-title">Usuarios</h3>
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
-                    <a href="#">Tables</a>
+                    <a href="#">Tablas</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
-                    Data table
+                    Usuarios
                   </li>
                 </ol>
               </nav>
             </div>
+
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Data table</h4>
+                <h4 className="card-title">Lista de usuarios</h4>
                 <div className="row">
                   <div className="col-12">
-                    <table id="order-listing" className="table">
+                    <table className="table">
                       <thead>
                         <tr>
-                          <th>Order #</th>
-                          <th>Purchased On</th>
-                          <th>Customer</th>
-                          <th>Ship to</th>
-                          <th>Base Price</th>
-                          <th>Purchased Price</th>
-                          <th>Status</th>
-                          <th>Actions</th>
+                          <th>Nombre</th>
+                          <th>Apellido Paterno</th>
+                          <th>Apellido Materno</th>
+                          <th>Teléfono</th>
+                          <th>Celular</th>
+                          <th>Correo Electrónico</th>
+                          <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>2012/08/03</td>
-                          <td>Edinburgh</td>
-                          <td>New York</td>
-                          <td>$1500</td>
-                          <td>$3200</td>
-                          <td>
-                            <label className="badge badge-info">On hold</label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>2015/04/01</td>
-                          <td>Doe</td>
-                          <td>Brazil</td>
-                          <td>$4500</td>
-                          <td>$7500</td>
-                          <td>
-                            <label className="badge badge-danger">
-                              Pending
-                            </label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>2010/11/21</td>
-                          <td>Sam</td>
-                          <td>Tokyo</td>
-                          <td>$2100</td>
-                          <td>$6300</td>
-                          <td>
-                            <label className="badge badge-success">
-                              Closed
-                            </label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>2016/01/12</td>
-                          <td>Sam</td>
-                          <td>Tokyo</td>
-                          <td>$2100</td>
-                          <td>$6300</td>
-                          <td>
-                            <label className="badge badge-success">
-                              Closed
-                            </label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>5</td>
-                          <td>2017/12/28</td>
-                          <td>Sam</td>
-                          <td>Tokyo</td>
-                          <td>$2100</td>
-                          <td>$6300</td>
-                          <td>
-                            <label className="badge badge-success">
-                              Closed
-                            </label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>6</td>
-                          <td>2000/10/30</td>
-                          <td>Sam</td>
-                          <td>Tokyo</td>
-                          <td>$2100</td>
-                          <td>$6300</td>
-                          <td>
-                            <label className="badge badge-info">On-hold</label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>7</td>
-                          <td>2011/03/11</td>
-                          <td>Cris</td>
-                          <td>Tokyo</td>
-                          <td>$2100</td>
-                          <td>$6300</td>
-                          <td>
-                            <label className="badge badge-success">
-                              Closed
-                            </label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>8</td>
-                          <td>2015/06/25</td>
-                          <td>Tim</td>
-                          <td>Italy</td>
-                          <td>$6300</td>
-                          <td>$2100</td>
-                          <td>
-                            <label className="badge badge-info">On-hold</label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>9</td>
-                          <td>2016/11/12</td>
-                          <td>John</td>
-                          <td>Tokyo</td>
-                          <td>$2100</td>
-                          <td>$6300</td>
-                          <td>
-                            <label className="badge badge-success">
-                              Closed
-                            </label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>10</td>
-                          <td>2003/12/26</td>
-                          <td>Tom</td>
-                          <td>Germany</td>
-                          <td>$1100</td>
-                          <td>$2300</td>
-                          <td>
-                            <label className="badge badge-danger">
-                              Pending
-                            </label>
-                          </td>
-                          <td>
-                            <button className="btn btn-outline-primary">
-                              View
-                            </button>
-                          </td>
-                        </tr>
+                        {usuarios.length > 0 ? (
+                          usuarios.map((usuario) => (
+                            <tr key={usuario.id_usuarios}>
+                              <td>{usuario.nombre}</td>
+                              <td>{usuario.a_paterno}</td>
+                              <td>{usuario.a_materno}</td>
+                              <td>{usuario.telefono}</td>
+                              <td>{usuario.celular}</td>
+                              <td>{usuario.correo_electronico}</td>
+                              <td>
+                                <button
+                                  className="btn btn-sm btn-primary me-2"
+                                  onClick={() =>
+                                    handleEdit(usuario.id_usuarios)
+                                  }
+                                >
+                                  Editar
+                                </button>
+                                <button
+                                  className="btn btn-sm btn-danger"
+                                  onClick={() =>
+                                    handleDelete(usuario.id_usuarios)
+                                  }
+                                >
+                                  Eliminar
+                                </button>
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <tr>
+                            <td colSpan={7}>No hay usuarios disponibles</td>
+                          </tr>
+                        )}
                       </tbody>
                     </table>
                   </div>
@@ -230,16 +115,130 @@ function Client() {
               </div>
             </div>
           </div>
-          {/* content-wrapper ends */}
-          {/* partial:../../partials/_footer.html */}
+
           <Footer />
-          {/* partial */}
+
+          {usuarioEditando && (
+            <div
+              className="modal fade show"
+              style={{
+                display: "block",
+                backgroundColor: "rgba(0,0,0,0.5)",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                zIndex: 1050,
+              }}
+              tabIndex={-1}
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      fetch(
+                        `http://localhost:8000/api/usuarios/${usuarioEditando.id_usuarios}`,
+                        {
+                          method: "PUT",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify(usuarioEditando),
+                        }
+                      )
+                        .then((res) => res.json())
+                        .then((data) => {
+                          setUsuarios((prev) =>
+                            prev.map((u) =>
+                              u.id_usuarios === data.id_usuarios ? data : u
+                            )
+                          );
+                          setUsuarioEditando(null);
+                        })
+                        .catch((err) => console.error("Error al editar:", err));
+                    }}
+                  >
+                    <div className="modal-header">
+                      <h5 className="modal-title">Editar Usuario</h5>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        onClick={() => setUsuarioEditando(null)}
+                      ></button>
+                    </div>
+                    <div className="modal-body">
+                      <input
+                        type="text"
+                        className="form-control mb-2"
+                        placeholder="Nombre"
+                        value={usuarioEditando.nombre}
+                        onChange={(e) =>
+                          setUsuarioEditando({
+                            ...usuarioEditando,
+                            nombre: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="text"
+                        className="form-control mb-2"
+                        placeholder="Apellido Paterno"
+                        value={usuarioEditando.a_paterno}
+                        onChange={(e) =>
+                          setUsuarioEditando({
+                            ...usuarioEditando,
+                            a_paterno: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="text"
+                        className="form-control mb-2"
+                        placeholder="Apellido Materno"
+                        value={usuarioEditando.a_materno}
+                        onChange={(e) =>
+                          setUsuarioEditando({
+                            ...usuarioEditando,
+                            a_materno: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="email"
+                        className="form-control mb-2"
+                        placeholder="Correo electrónico"
+                        value={usuarioEditando.correo_electronico}
+                        onChange={(e) =>
+                          setUsuarioEditando({
+                            ...usuarioEditando,
+                            correo_electronico: e.target.value,
+                          })
+                        }
+                      />
+                      {/* Puedes agregar más campos si lo deseas */}
+                    </div>
+                    <div className="modal-footer">
+                      <button type="submit" className="btn btn-primary">
+                        Guardar Cambios
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={() => setUsuarioEditando(null)}
+                      >
+                        Cancelar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-        {/* main-panel ends */}
       </div>
-      {/* page-body-wrapper ends */}
     </div>
   );
 }
 
 export default Client;
+

@@ -1,10 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import AppRoutes from "./routes/AppRoutes"; // Ajusta la ruta si es necesario
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Usuarios from "./pages/Client";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <AppRoutes />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Usuarios />} />
+        {/* Puedes agregar más rutas aquí */}
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
