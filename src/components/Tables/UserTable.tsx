@@ -1,6 +1,6 @@
 import { useApi } from "../../hooks/useApi";
 
-const Usuarios = () => {
+const UserTable = () => {
   const apiUrl = "http://almacenplus.test/api/user/";
   const { dataAPI, error } = useApi(apiUrl);
 
@@ -87,4 +87,4 @@ const Usuarios = () => {
   );
 };
 
-export default Usuarios;
+export default UserTable;

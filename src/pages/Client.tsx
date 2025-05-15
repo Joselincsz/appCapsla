@@ -16,7 +16,6 @@ function Client() {
     contraseña: "",
   });
   const [mostrarFormularioNuevo, setMostrarFormularioNuevo] = useState(false);
-  
 
   useEffect(() => {
     fetch("http://localhost:8000/api/usuarios")
