@@ -1,9 +1,9 @@
 import NavBar from "../components/NavBar";
 import MenuIzquierdo from "../components/Sidebar";
 import Footer from "../components/Footer";
-import TablaDireccion from "../components/Tables/DirrecionTable";
+import TablaContrato from "../components/Tables/ContratoTable";
 
-function Direccion() {
+function Contrato() {
   return (
     <div className="container-scroller">
       {/* partial:../../partials/_navbar.html */}
@@ -34,7 +34,7 @@ function Direccion() {
               </nav>
             </div>
             <div>
-              <TablaDireccion />
+              <TablaContrato />
             </div>
           </div>
           {/* content-wrapper ends */}
@@ -49,4 +49,4 @@ function Direccion() {
   );
 }
 
-export default Direccion;
+export default Contrato;

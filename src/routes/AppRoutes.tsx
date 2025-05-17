@@ -1,8 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Profiles from "../pages/Profiles";
 import Client from "../pages/Client";
-import Dirrecion from "../pages/Direccion";
-import RegistroContrato from "../components/Forms/RegistroContrato";
+import Direccion from "../pages/Direccion";
+import TomaAgua from "../pages/TomaAgua";
+import Contrato from "../pages/Contrato";
+import Documentos from "../pages/Documentos";
+import ContratoRegister from "../pages/ContratoRegister";
 import Ejemplo from "../pages/Ejemplo";
 import Autenticacion from "../pages/AuthViews/Autenticacion";
 import RegistrarUsuario from "../pages/RegisterViews/RegistrarUsuario";
@@ -17,13 +20,20 @@ function AppRoutes() {
         <Route path="/1" element={<h1>Inicio</h1>} />
         <Route path="/profiles" element={<Profiles />} />
         <Route path="/client" element={<Client />} />
-        <Route path="/direccion" element={<Dirrecion />} />
-        <Route path="/registroContrato" element={<RegistroContrato />} />
+        <Route path="/direccion" element={<Direccion />} />
+        <Route path="/tomaAgua" element={<TomaAgua />} />
+        <Route path="/contrato" element={<Contrato />} />
+        <Route path="/documentos" element={<Documentos />} />
+        <Route path="/contratoRegister" element={<ContratoRegister />} />
         <Route path="/ejemplo" element={<Ejemplo />} />
         <Route path="/autenticacion" element={<Autenticacion />} />
         <Route path="/registrarUsuario" element={<RegistrarUsuario />} />
         <Route path="/cambiarContrasennia" element={<CambiarContrasennia />} />
-        <Route path="/recuperacionContrasennia" element={<RecuperacionContrasennia />} />
+        <Route
+          path="/recuperacionContrasennia"
+          element={<RecuperacionContrasennia />}
+        />
+        <Route path="/documentos" element={<Documentos />} />
       </Routes>
     </Router>
   );

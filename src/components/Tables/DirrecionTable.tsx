@@ -28,14 +28,10 @@ const ContratosTable = () => {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Estado</th>
-                    <th>Código Postal</th>
-                    <th>Municipio</th>
-                    <th>Colonia</th>
-                    <th>Calle</th>
-                    <th>Numero Interior</th>
-                    <th>Numero Exterior</th>
+                    <th>Ubicación</th>
+                    <th>Domicilio</th>
                     <th>Referencias</th>
+                    <th>Cliente</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -43,14 +39,19 @@ const ContratosTable = () => {
                   {dataAPI.data.map((direccion: any) => (
                     <tr key={direccion.iddireccion}>
                       <td>{direccion.iddireccion}</td>
-                      <td>{direccion.estatus || "N/A"}</td>
-                      <td>{direccion.codigo_postal || "N/A"}</td>
-                      <td>{direccion.municipio || "N/A"}</td>
-                      <td>{direccion.colonia || "N/A"}</td>
-                      <td>{direccion.calle || "N/A"}</td>
-                      <td>{direccion.numero_interior || "N/A"}</td>
-                      <td>{direccion.numero_exterior || "N/A"}</td>
-                      <td>{direccion.refrencias || "N/A"}</td>
+                      <td>
+                        {direccion.estado || "N/A"},{" "}
+                        {direccion.municipio || "N/A"},<br />
+                        C.P. {direccion.codigo_postal || "N/A"}
+                      </td>
+                      <td>
+                        {direccion.colonia || "N/A"}, {direccion.calle || "N/A"}
+                        <br />
+                        Ext: {direccion.numero_exterior || "N/A"} | Int:{" "}
+                        {direccion.numero_interior || "N/A"}
+                      </td>
+                      <td>{direccion.referencias || "N/A"}</td>
+                      <td>{direccion.cliente || "N/A"}</td>
                       <td>
                         <Botones />
                       </td>

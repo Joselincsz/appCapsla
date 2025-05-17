@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
+
 function Sidebar() {
   return (
     <div className="page-body-wrapper">
-      
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <ul className="nav">
           <br></br>
@@ -25,13 +26,22 @@ function Sidebar() {
               aria-controls="page-layouts"
             >
               <span className="icon-bg">
-                <i className="mdi mdi-account-multiple menu-icon" />
+                <i className="mdi mdi-account-group menu-icon" />
               </span>
               <span className="menu-title">Usuarios</span>
             </a>
           </li>
 
           <li className="nav-item nav-category">Administración</li>
+
+          <li className="nav-item">
+            <a className="nav-link" href="/Client">
+              <span className="icon-bg">
+                <i className="mdi mdi-account-group menu-icon" />
+              </span>
+              <span className="menu-title">Clientes</span>
+            </a>
+          </li>
 
           <li className="nav-item">
             <a
@@ -42,64 +52,35 @@ function Sidebar() {
               aria-controls="clientes"
             >
               <span className="icon-bg">
-                <i className="mdi mdi-account-group menu-icon" />
+                <i className="mdi mdi-file-document-box menu-icon" />
               </span>
-              <span className="menu-title">Clientes</span>
+              <span className="menu-title">Contratos</span>
               <i className="menu-arrow" />
             </a>
             <div className="collapse" id="clientes">
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item">
-                  <a className="nav-link" href="/clientes/registro.html">
-                    Registrar cliente
+                  <a className="nav-link" href="/ContratoRegister">
+                    Registrar contratos
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/clientes/listado.html">
-                    Lista de clientes
+                  <a className="nav-link" href="/Contrato">
+                    Lista de contratos
                   </a>
                 </li>
               </ul>
             </div>
           </li>
-
-          <li className="nav-item">
-            <a className="nav-link" href="../../pages/samples/widgets.html">
-              <span className="icon-bg">
-                <i className="mdi mdi-file-document-box menu-icon" />
-              </span>
-              <span className="menu-title">Contratos</span>
-            </a>
-          </li>
-
           <li className="nav-item nav-category">Gestión</li>
 
           <li className="nav-item">
-            <a
-              className="nav-link"
-              href="#ui-basic"
-              data-toggle="collapse"
-              aria-expanded="false"
-              aria-controls="ui-basic"
-            >
+            <a className="nav-link" href="/Direccion">
               <span className="icon-bg">
                 <i className="mdi mdi-map-marker-radius menu-icon" />
               </span>
               <span className="menu-title">Direcciones</span>
-              <i className="menu-arrow" />
             </a>
-            <div className="collapse" id="ui-basic">
-              <ul className="nav flex-column sub-menu">
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    href="../../pages/ui-features/accordions.html"
-                  >
-                    Gestión de zonas
-                  </a>
-                </li>
-              </ul>
-            </div>
           </li>
 
           <li className="nav-item">
@@ -119,10 +100,7 @@ function Sidebar() {
             <div className="collapse" id="ui-advanced">
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    href="../../pages/ui-features/dragula.html"
-                  >
+                  <a className="nav-link" href="/TomaAgua">
                     Administrar tomas
                   </a>
                 </li>
@@ -131,7 +109,7 @@ function Sidebar() {
           </li>
 
           <li className="nav-item">
-            <a className="nav-link" href="../../pages/ui-features/popups.html">
+            <a className="nav-link" href="/Documentos">
               <span className="icon-bg">
                 <i className="mdi mdi-file-document-outline menu-icon" />
               </span>

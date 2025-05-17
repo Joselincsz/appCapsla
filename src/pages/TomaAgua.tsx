@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar";
 import MenuIzquierdo from "../components/Sidebar";
 import Footer from "../components/Footer";
-import TablaDireccion from "../components/Tables/DirrecionTable";
+import TablaTomaAgua from "../components/Tables/TomaAguaTable";
 
 function Direccion() {
   return (
@@ -34,7 +34,7 @@ function Direccion() {
               </nav>
             </div>
             <div>
-              <TablaDireccion />
+              <TablaTomaAgua />
             </div>
           </div>
           {/* content-wrapper ends */}
