@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar";
 import MenuIzquierdo from "../components/Sidebar";
 import Footer from "../components/Footer";
-import TablaContrato from "../components/Tables/ContratoTable";
+import TablaContrato from "../components/Tables/ContratoTable/index";
 
 function Contrato() {
   return (

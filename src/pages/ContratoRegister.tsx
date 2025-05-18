@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import StepWizard from "react-step-wizard";
 import { Button } from "react-bootstrap";
-import TomaAgua from "../components/Forms/TomaAgua";
-import Direccion from "../components/Forms/Direccion";
-import Contrato from "../components/Forms/Contrato";
-import Documentos from "../components/Forms/Documentos";
 import NavBar from "../components/NavBar";
 import MenuIzquierdo from "../components/Sidebar";
 import Footer from "../components/Footer";
+
+import Contrato from "../components/Forms/ContratoForms/index";
+import Direccion from "../components/Forms/DireccionForms/index";
+import Documento from "../components/Forms/DocumentoForms/index";
+import TomaAgua from "../components/Forms/TomaAguaForms/index";
+
 
 function ContratoRegister() {
   const [stepWizardInstance, setStepWizardInstance] = useState(null);
@@ -71,7 +73,7 @@ function ContratoRegister() {
                   <Direccion />
                   <TomaAgua />
                   <Contrato />
-                  <Documentos />
+                  <Documento />
                 </StepWizard>
 
                 {/* Botones de navegación */}

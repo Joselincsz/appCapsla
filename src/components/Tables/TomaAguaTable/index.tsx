@@ -1,4 +1,4 @@
-import Botones from "../Buttons/ButtonsTable";
+import Botones from "../../Buttons/ButtonsTable";
 
 const TomaAgua = () => {
   // Datos simulados
@@ -83,9 +83,7 @@ const TomaAgua = () => {
   );
 };
 
-
 export default TomaAgua;
-
 
 /*
 import { useApi } from "../../hooks/useApi";

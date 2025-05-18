@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar";
 import MenuIzquierdo from "../components/Sidebar";
 import Footer from "../components/Footer";
-import TablaTomaAgua from "../components/Tables/TomaAguaTable";
+import TablaTomaAgua from "../components/Tables/TomaAguaTable/index";
 
 function Direccion() {
   return (

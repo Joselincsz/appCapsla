@@ -1,7 +1,8 @@
 import NavBar from "../components/NavBar";
 import MenuIzquierdo from "../components/Sidebar";
 import Footer from "../components/Footer";
-import TablaDireccion from "../components/Tables/DirrecionTable";
+import TablaDireccion from "../components/Tables/DireccionTable/index";
+//import TablaDireccion from "../pages/Ejemplo";
 
 function Direccion() {
   return (

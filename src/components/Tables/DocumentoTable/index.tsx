@@ -1,4 +1,4 @@
-import Botones from "../Buttons/ButtonsTable";
+import Botones from "../../Buttons/ButtonsTable";
 
 const DocumentosTable = () => {
   // Datos simulados
@@ -97,12 +97,13 @@ const DocumentosTable = () => {
 
 export default DocumentosTable;
 
+
 /*
 import { useApi } from "../../hooks/useApi";
 import Botones from "../Buttons/ButtonsTable";
 
 const DocumentosTable = () => {
-  const apiUrl = "http://capsla.test/api/documentos/"; 
+  const apiUrl = "http://capsla.test/api/documentos/"; // Cambia a tu endpoint real
   const { dataAPI, error } = useApi(apiUrl);
 
   return (
@@ -163,13 +164,9 @@ const DocumentosTable = () => {
             </div>
 
             <div className="pagination d-flex justify-content-end align-items-center mt-3 gap-2">
-              <button className="btn btn-outline-primary btn-sm">
-                Anterior
-              </button>
+              <button className="btn btn-outline-primary btn-sm">Anterior</button>
               <span className="page-number">1</span>
-              <button className="btn btn-outline-primary btn-sm">
-                Siguiente
-              </button>
+              <button className="btn btn-outline-primary btn-sm">Siguiente</button>
             </div>
           </div>
         ) : (

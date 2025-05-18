@@ -1,4 +1,4 @@
-import Botones from "../Buttons/ButtonsTable";
+import Botones from "../../Buttons/ButtonsTable";
 
 const Contrato = () => {
   // Datos simulados
